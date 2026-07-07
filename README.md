@@ -88,6 +88,23 @@ php -S 127.0.0.1:8081 -t /opt/homebrew/share/phpmyadmin
 
 ---
 
+## Deploy ke Hostinger (shared hosting, TANPA Node)
+
+Hostinger **tidak perlu Node/npm**. Tailwind & Alpine hanya di-build di laptop, hasilnya file statis yang diunggah.
+
+1. **Build di laptop:**
+   ```bash
+   npm run build      # menghasilkan public/build/ (CSS + JS statis)
+   ```
+2. **Upload ke Hostinger** (File Manager / FTP / git) — pastikan folder **`public/build/`** ikut terunggah. (Folder ini sengaja tidak di-`.gitignore`.)
+3. **Import data**: upload `database/pipeline_dump.sql` via phpMyAdmin Hostinger ke database kosong.
+4. **Set `.env` produksi**: `APP_ENV=production`, `APP_DEBUG=false`, `APP_KEY` (jalankan `php artisan key:generate` sekali), dan kredensial `DB_*` Hostinger.
+5. **Composer di server** (jika belum): `composer install --no-dev --optimize-autoloader`.
+
+> Kalau nanti mengubah tampilan (kelas Tailwind), **build ulang di laptop** lalu upload `public/build/` yang baru. Server tidak pernah menjalankan `npm`.
+
+---
+
 ## Database
 
 - **Nama DB**: `pipeline`

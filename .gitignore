@@ -14,7 +14,8 @@
 /.zed
 /auth.json
 /node_modules
-/public/build
+# /public/build sengaja TIDAK diignore — Hostinger tak bisa build (tanpa Node),
+# jadi hasil `npm run build` harus ikut ter-upload/commit.
 /public/fonts-manifest.dev.json
 /public/hot
 /public/storage
